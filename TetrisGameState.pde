@@ -1,21 +1,29 @@
 
 boolean isBlockStuck(Game game)
 {
-  Block block = game.fallingBlock;
   boolean[][] blocks = game.blocks;
-  
-  
-  // TODO: check all block parts
-  return (block.yPos + 1 >= game.wellHeight)
-      || (blocks[block.xPos][block.yPos + 1]);
-}
 
-boolean validateFallingBlockPos(Game game) {
-  return true;
+  Block block = game.fallingBlock;  
+  BlockPart[] parts = block.parts;
+  
+  boolean stuck = block.yPos + 1 >= game.wellHeight;
+  for (int i = 0; (i < BlockPartsCount) && (!stuck); i++) {
+    stuck = stuck
+      || parts[i].yPos + 1 >= game.wellHeight
+      || blocks[parts[i].xPos][parts[i].yPos + 1];
+  }
+  
+  return stuck;
 }
 
 void fixateBlock(Game game) {
-  // Not implemented yet
+  Block block = game.fallingBlock;  
+  BlockPart[] parts = block.parts;
+  
+  for (int i = 0; i < BlockPartsCount; i++) {
+    game.blocks[parts[i].xPos][parts[i].yPos] = true;
+  }
+  game.fallingBlock = null;
 }
 
 void generateNextBlock(Game game) {
@@ -26,15 +34,12 @@ Game updateGameState(Game game) {
   Game currentGame = game;
   
   if (currentGame.fallingBlock != null) {
-    
-    // Debug only
-    if (!validateFallingBlockPos(currentGame)) {
-      println("invalid block pos.");
-    }
-      
+         
     if (isBlockStuck(currentGame)) {
       fixateBlock(currentGame);
       generateNextBlock(currentGame);
+    } else {
+      moveBlockDown(currentGame.fallingBlock); 
     }
   }
   

@@ -13,13 +13,14 @@ float calculateUpdateThreshold(float updateThreshold) {
 void drawTestRect()
 {
   fill(0xFF000000 | (int)random(0xFFFFFF));
-  rect(1*windowScale, 1*windowScale, windowScale, windowScale);
+  rect(1*BlockScale, 1*BlockScale, BlockScale, BlockScale);
 }
 
 void setup() {
 
   game = new Game(w, h);
-  size(w*windowScale + 1, h*windowScale + 1);
+  game.fallingBlock = generateFallingBlock();
+  size(w*BlockScale + 1, h*BlockScale + 1);
 
   frameRate(framesInSecond);
 }
@@ -33,7 +34,6 @@ void draw() {
  
   if (updateCycleThreshold > gameSpeed) {
     newGame = updateGameState(game);
-    drawTestRect();
     
     if (isGameOver(newGame)) {
        // Do something on end of game
@@ -42,7 +42,7 @@ void draw() {
      updateCycleThreshold = 0;
   }
   
-  drawGameState(newGame); 
+  drawGameState(newGame);
 }
 
 void keyPressed() {

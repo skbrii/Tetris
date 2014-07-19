@@ -1,17 +1,44 @@
-static final int windowScale = 8;
+static final int BlockScale = 8;
 
-void drawWell(int w, int h)
+void drawWellGrid(int w, int h)
 {
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
-      stroke(0x55660000);
-      rect(x*windowScale, y*windowScale, windowScale, windowScale);
+      stroke(0xFFBBBB00);
+      fill(0xFF00FF00);
+      rect(x*BlockScale, y*BlockScale, BlockScale, BlockScale);
     }
   }
 }
 
+void drawBlocks(int w, int h, boolean[][] blocks) {
+  for (int x = 0; x < w; x++) {
+    for (int y = 0; y < h; y++) {
+      if (blocks[x][y]) {
+        fill(0xFF000000 | (int)random(0xFFFFFF)); // For fun.
+        rect(x*BlockScale, y*BlockScale, BlockScale, BlockScale);
+      }
+    }
+  }
+}
+
+void drawFallingBlock(Block block)
+{
+  if (block == null)
+    return;
+    
+  BlockPart[] parts = block.parts;
+  
+  stroke(0x00BB0000);
+  fill(0xFFFF0000);
+  
+  for (int i = 0; i < BlockPartsCount; i++)
+    rect(parts[i].xPos*BlockScale, parts[i].yPos*BlockScale, BlockScale, BlockScale);
+}
+
 void drawGameState(Game game)
 {
-  drawWell(game.wellWidth, game.wellHeight);
-  
+  drawWellGrid(game.wellWidth, game.wellHeight);
+  drawBlocks(game.wellWidth, game.wellHeight, game.blocks);
+  drawFallingBlock(game.fallingBlock);
 }

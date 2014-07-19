@@ -1,5 +1,5 @@
 // Classic Tetris only blocks
-static final int blockPartsCount = 4;
+static final int BlockPartsCount = 4;
 
 static final int I = 0;
 static final int O = 1;
@@ -14,20 +14,6 @@ static final int East = 1;
 static final int South = 2;
 static final int West = 3;
 
-class Block {
-  int type;
-  int xPos;
-  int yPos;
-  int direction;
-  
-  Block (int blockType, int blockXPos, int blockYPos, int blockDirection) {
-    type = blockType;
-    xPos = blockXPos;
-    yPos = blockYPos;
-    direction = blockDirection;
-  }
-};
-
 class BlockPart {
   int xPos;
   int yPos;
@@ -37,4 +23,20 @@ class BlockPart {
    yPos = blockYPos;    
   }  
 };
+
+class Block {
+  int type;
+  int xPos;
+  int yPos;
+  int direction;
+  BlockPart[] parts;
+  
+  Block (int blockType, int blockXPos, int blockYPos, int blockDirection) {
+    type = blockType;
+    xPos = blockXPos;
+    yPos = blockYPos;
+    direction = blockDirection;
+  }
+};
+
 
