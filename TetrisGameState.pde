@@ -26,6 +26,12 @@ void fixateBlock(Game game) {
   game.fallingBlock = null;
 }
 
+void eraseFilledLines(Game game) {
+ for (int i = game.wellHeight - 1; i >= 0; i--) {
+   
+ }
+}
+
 void generateNextBlock(Game game) {
   // Not implemented yet
 }
@@ -33,13 +39,15 @@ void generateNextBlock(Game game) {
 Game updateGameState(Game game) {
   Game currentGame = game;
   
-  if (currentGame.fallingBlock != null) {
-         
+  if (currentGame.erasingNeeded) {
+    eraseFilledLines(currentGame);
+  } else if (currentGame.fallingBlock != null) {
     if (isBlockStuck(currentGame)) {
       fixateBlock(currentGame);
+      enableErasingCheck(currentGame);
       generateNextBlock(currentGame);
     } else {
-      moveBlockDown(currentGame.fallingBlock); 
+      moveBlockDown(currentGame.fallingBlock);
     }
   }
   

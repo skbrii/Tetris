@@ -15,7 +15,8 @@ void drawBlocks(int w, int h, boolean[][] blocks) {
   for (int x = 0; x < w; x++) {
     for (int y = 0; y < h; y++) {
       if (blocks[x][y]) {
-        fill(0xFF000000 | (int)random(0xFFFFFF)); // For fun.
+        //fill(0xFF000000 | (int)random(0xFFFFFF)); // For fun.
+        fill(0xFF0000FF);
         rect(x*BlockScale, y*BlockScale, BlockScale, BlockScale);
       }
     }

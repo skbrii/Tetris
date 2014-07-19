@@ -3,11 +3,11 @@ static final int h = 60;
 static final int framesInSecond = 30;
 static final float gameSpeed = framesInSecond / 1.0;
 
-float updateCycleThreshold = 0;
+float updatingThreshold = 0;
 Game game;
 
-float calculateUpdateThreshold(float updateThreshold) {
-  return updateThreshold + 1;
+float recalculateUpdatingThreshold(float threshold) {
+  return threshold + 1;
 }
 
 void drawTestRect()
@@ -30,16 +30,16 @@ void draw() {
   background(0); 
   Game newGame = game;
   
-  updateCycleThreshold = calculateUpdateThreshold(updateCycleThreshold);
+  updatingThreshold = recalculateUpdatingThreshold(updatingThreshold);
  
-  if (updateCycleThreshold > gameSpeed) {
+  if (updatingThreshold > gameSpeed) {
     newGame = updateGameState(game);
     
     if (isGameOver(newGame)) {
        // Do something on end of game
     }
      
-     updateCycleThreshold = 0;
+     updatingThreshold = 0;
   }
   
   drawGameState(newGame);

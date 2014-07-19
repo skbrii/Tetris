@@ -40,7 +40,7 @@ void moveBlockDown(Block block) {
 Block generateFallingBlock() {
   
   // TODO: dummy, fix me
-  Block block = new Block(0,0,20,0);
+  Block block = new Block(0,0,0,0);
   block.parts = getIBlockParts(0);
   
   return block;
