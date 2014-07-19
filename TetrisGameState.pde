@@ -44,10 +44,33 @@ class Game {
   Block currentBlock;
 };
 
+boolean isBlockStuck(Game game)
+{
+  Block block = game.currentBlock;
+  boolean[][] blocks = game.blocks;
+  
+  return (block.yPos + 1 >= game.wellHeight)
+      || (blocks[block.xPos][block.yPos + 1]);
+}
 
-Game updateGameState(Game currentGame) {
-  // Not implemented yet
-  return currentGame;
+boolean validateCurrentBlockPos(Game game) {
+  return true;
+}
+
+Game updateGameState(Game game) {
+  Game updatedGame = game;
+  
+  if (game.currentBlock != null) {
+    
+    // Debug only
+    if (!validateCurrentBlockPos(game)) {
+      println("invalid block pos.");
+    }
+      
+    boolean moved = isBlockStuck(game);
+  }
+  
+  return updatedGame;
 }
 
 boolean isGameOver(Game currentGame) {
