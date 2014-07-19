@@ -27,9 +27,34 @@ void fixateBlock(Game game) {
 }
 
 void eraseFilledLines(Game game) {
- for (int i = game.wellHeight - 1; i >= 0; i--) {
+  
+ for (int y = game.wellHeight - 1; y >= 0;) {
    
+   boolean erasable = true;
+   for (int x = 0; x < game.wellWidth; x++)
+     erasable = erasable && game.blocks[x][y];
+    
+   if (erasable) {
+     
+     // Move blocks down
+     for (int y2 = y - 1; y2 >= 0; y2--)
+       for (int x = 0; x < game.wellWidth; x++)
+         game.blocks[x][y2 + 1] = game.blocks[x][y2];
+    
+     // Top level needs to be cleared.
+     for (int x = 0; x < game.wellWidth; x++)
+       game.blocks[x][0] = false;
+   
+   } else {
+     y--;
+   }
  }
+ 
+ game.erasingNeeded = false;
+}
+
+void enableErasing(Game game) {
+ game.erasingNeeded = true; 
 }
 
 void generateNextBlock(Game game) {
@@ -44,7 +69,7 @@ Game updateGameState(Game game) {
   } else if (currentGame.fallingBlock != null) {
     if (isBlockStuck(currentGame)) {
       fixateBlock(currentGame);
-      enableErasingCheck(currentGame);
+      enableErasing(currentGame);
       generateNextBlock(currentGame);
     } else {
       moveBlockDown(currentGame.fallingBlock);

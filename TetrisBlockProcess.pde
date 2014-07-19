@@ -41,7 +41,7 @@ Block generateFallingBlock() {
   
   // TODO: dummy, fix me
   Block block = new Block(0,0,0,0);
-  block.parts = getIBlockParts(0);
+  block.parts = getIBlockParts(East);
   
   return block;
 }
