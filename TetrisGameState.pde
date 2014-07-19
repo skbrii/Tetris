@@ -1,29 +1,4 @@
-int I = 0;
-int O = 1;
-int T = 2;
-int S = 3;
-int Z = 4;
-int J = 5;
-int L = 6;
 
-int North = 0;
-int East = 1;
-int South = 2;
-int West = 3;
-
-class Block {
-  int type;
-  int xPos;
-  int yPos;
-  int direction;
-  
-  Block (int blockType, int blockXPos, int blockYPos, int blockDirection) {
-    type = blockType;
-    xPos = blockXPos;
-    yPos = blockYPos;
-    direction = blockDirection;
-  }
-};
 
 class Game {
   int wellWidth;
@@ -32,7 +7,7 @@ class Game {
   Game (int w, int h) {
     wellWidth = w;
     wellHeight = h;
-    currentBlock = null;
+    fallingBlock = null;
     
     blocks = new boolean[w][h];
     for (int x = 0; x < w; x++)
@@ -41,36 +16,49 @@ class Game {
   }
   
   boolean[][] blocks;
-  Block currentBlock;
+  Block fallingBlock;
 };
+
 
 boolean isBlockStuck(Game game)
 {
-  Block block = game.currentBlock;
+  Block block = game.fallingBlock;
   boolean[][] blocks = game.blocks;
   
+  // TODO: check all block parts
   return (block.yPos + 1 >= game.wellHeight)
       || (blocks[block.xPos][block.yPos + 1]);
 }
 
-boolean validateCurrentBlockPos(Game game) {
+boolean validateFallingBlockPos(Game game) {
   return true;
 }
 
+void fixateBlock(Game game) {
+  // Not implemented yet
+}
+
+void generateNextBlock(Game game) {
+  // Not implemented yet
+}
+
 Game updateGameState(Game game) {
-  Game updatedGame = game;
+  Game currentGame = game;
   
-  if (game.currentBlock != null) {
+  if (currentGame.fallingBlock != null) {
     
     // Debug only
-    if (!validateCurrentBlockPos(game)) {
+    if (!validateFallingBlockPos(currentGame)) {
       println("invalid block pos.");
     }
       
-    boolean moved = isBlockStuck(game);
+    if (isBlockStuck(currentGame)) {
+      fixateBlock(currentGame);
+      generateNextBlock(currentGame);
+    }
   }
   
-  return updatedGame;
+  return currentGame;
 }
 
 boolean isGameOver(Game currentGame) {

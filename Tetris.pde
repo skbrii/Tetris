@@ -16,7 +16,6 @@ void drawTestRect()
   rect(1*windowScale, 1*windowScale, windowScale, windowScale);
 }
 
-
 void setup() {
 
   game = new Game(w, h);
