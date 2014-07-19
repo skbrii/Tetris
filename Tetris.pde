@@ -1,9 +1,9 @@
-int w = 4;
-int h = 60;
-int framesInSecond = 30;
-float gameSpeed = framesInSecond / 1.0;
-float updateCycleThreshold = 0;
+static final int w = 4;
+static final int h = 60;
+static final int framesInSecond = 30;
+static final float gameSpeed = framesInSecond / 1.0;
 
+float updateCycleThreshold = 0;
 Game game;
 
 float calculateUpdateThreshold(float updateThreshold) {

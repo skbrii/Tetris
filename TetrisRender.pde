@@ -1,4 +1,4 @@
-int windowScale = 8;
+static final int windowScale = 8;
 
 void drawWell(int w, int h)
 {
