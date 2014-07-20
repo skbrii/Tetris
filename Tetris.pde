@@ -1,7 +1,7 @@
 static final int w = 4;
-static final int h = 10; // 60
+static final int h = 20; // 60
 static final int framesInSecond = 30;
-static final float gameSpeed = framesInSecond / 1.0;
+static final float gameSpeed = framesInSecond / 2.0;
 
 float updatingThreshold = 0;
 Game game;
@@ -19,8 +19,7 @@ void drawTestRect()
 void setup() {
 
   game = new Game(w, h);
-  game.fallingBlock = createBlock(I, 0, 0, East);
-  
+  generateRandomBlock(game);
   /*
   // Debug
   Block block = createBlock(I, North, 0, w);

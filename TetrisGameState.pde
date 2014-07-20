@@ -59,17 +59,11 @@ void enableErasing(Game game) {
  game.erasingNeeded = true; 
 }
 
-void generateNextBlock(Game game) {
+void generateRandomBlock(Game game) {
   int blockType = int(random(0, BlocksCount));
   int blockDirection = int(random(0, DirectionsCount));
   int xPos = int(random(0, game.wellWidth));
-  
-  // Debug only.
-  println("Type: " + blockType);
-  println("Direction: " + blockDirection);  
-  println("xPos: " + xPos);
-  
-  game.fallingBlock = createBlock(blockType, blockDirection, xPos, game.wellWidth);
+  game.fallingBlock = createBlock(blockType, blockDirection, xPos, 0, game.wellWidth);
 }
 
 Game updateGameState(Game game) {
@@ -81,7 +75,7 @@ Game updateGameState(Game game) {
     if (isBlockStuck(currentGame)) {
       fixateBlock(currentGame);
       enableErasing(currentGame);
-      generateNextBlock(currentGame);
+      generateRandomBlock(currentGame);
     } else {
       moveBlockDown(currentGame.fallingBlock);
     }
