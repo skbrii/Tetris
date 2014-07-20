@@ -1,7 +1,7 @@
 static final int w = 4;
 static final int h = 20; // 60
 static final int framesInSecond = 30;
-static final float gameSpeed = framesInSecond / 2.0;
+static final float gameSpeed = framesInSecond / 5.0; // moving down ~5 times in second
 
 float updatingThreshold = 0;
 Game game;

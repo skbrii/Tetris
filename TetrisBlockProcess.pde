@@ -1,65 +1,14 @@
-BlockPart[] getIBlockParts(int direction) {
-  BlockPart[] parts = new BlockPart[BlockPartsCount];
-  if ((direction == East) || (direction == West)) {
-     parts[0] = new BlockPart(0,0);
-     parts[1] = new BlockPart(1,0);
-     parts[2] = new BlockPart(2,0);
-     parts[3] = new BlockPart(3,0); 
-  } else {
-     parts[0] = new BlockPart(0,0);
-     parts[1] = new BlockPart(0,1);
-     parts[2] = new BlockPart(0,2);
-     parts[3] = new BlockPart(0,3); 
-  }
-  return parts;
-}
 
-BlockPart[] getOBlockParts() {
-  BlockPart[] parts = new BlockPart[BlockPartsCount];
-  parts[0] = new BlockPart(0,0);
-  parts[1] = new BlockPart(1,0);
-  parts[2] = new BlockPart(0,1);
-  parts[3] = new BlockPart(1,1); 
-  return parts;
-}
-
-BlockPart[] getTBlockParts(int direction) {
-  BlockPart[] parts = new BlockPart[BlockPartsCount];
-  switch (direction) {
-    case East:
-         parts[0] = new BlockPart(0,0);
-         parts[1] = new BlockPart(1,0);
-         parts[2] = new BlockPart(2,0);
-         parts[3] = new BlockPart(1,1);
-         break;
-    case South:
-         parts[0] = new BlockPart(1,0);
-         parts[1] = new BlockPart(0,1);
-         parts[2] = new BlockPart(1,1);
-         parts[3] = new BlockPart(1,2);
-         break;
-    case North:
-         parts[0] = new BlockPart(1,0);
-         parts[1] = new BlockPart(0,1);
-         parts[2] = new BlockPart(1,1);
-         parts[3] = new BlockPart(2,1);
-         break;
-    case West:
-         parts[0] = new BlockPart(0,0);
-         parts[1] = new BlockPart(0,1);
-         parts[2] = new BlockPart(1,1);
-         parts[3] = new BlockPart(0,2);
-         break;
-  }
-  return parts;
-}
 
 BlockPart[] getBlockParts(Block block) {
   switch(block.type) {
     case I: return getIBlockParts(block.direction);
     case O: return getOBlockParts();
     case T: return getTBlockParts(block.direction);
-
+    case S: return getSBlockParts(block.direction);
+    case Z: return getZBlockParts(block.direction);
+    case J: return getJBlockParts(block.direction);
+    case L: return getLBlockParts(block.direction);
     // TODO: implement other blocks
   }
   
