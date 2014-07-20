@@ -1,5 +1,5 @@
-static final int w = 4;
-static final int h = 20; // 60
+static final int w = 10; // 4
+static final int h = 30; // 60
 static final int framesInSecond = 30;
 static final float gameSpeed = framesInSecond / 5.0; // moving down ~5 times in second
 
@@ -53,5 +53,12 @@ void draw() {
 }
 
 void keyPressed() {
+  if (key == CODED) {
+    switch (keyCode) {
+      case LEFT:  moveBlock(game, MoveLeft);  break;
+      case RIGHT: moveBlock(game, MoveRight); break;
+      case DOWN:  makeBlockFall(game);  break;
+    }
+  }
 }
 

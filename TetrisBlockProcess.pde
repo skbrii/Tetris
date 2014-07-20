@@ -9,14 +9,12 @@ BlockPart[] getBlockParts(Block block) {
     case Z: return getZBlockParts(block.direction);
     case J: return getJBlockParts(block.direction);
     case L: return getLBlockParts(block.direction);
-    // TODO: implement other blocks
   }
   
-  // TODO: debug only
   return getIBlockParts(block.direction);
 }
 
-void moveBlockDown(Block block) {
+void makeBlockFall(Block block) {
   block.yPos += 1;
   for (int i = 0; i < BlockPartsCount; i++) {
    block.parts[i].yPos += 1;
@@ -54,4 +52,12 @@ Block createBlock(int type, int direction, int xPos, int yPos, int wellWidth) {
   block.parts = getBlockParts(block);
   arrangeNewBlock(block, wellWidth);  
   return block;
+}
+
+void moveBlockHorizontal(Block block, int distance) {
+  for (int i = 0; i < BlockPartsCount; i++) {
+    block.parts[i].xPos = block.parts[i].xPos + distance;
+  }
+  
+  block.yPos += distance;
 }
