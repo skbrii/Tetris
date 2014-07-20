@@ -57,8 +57,11 @@ void keyPressed() {
     switch (keyCode) {
       case LEFT:  moveBlock(game, MoveLeft);  break;
       case RIGHT: moveBlock(game, MoveRight); break;
-      case DOWN:  makeBlockFall(game);  break;
+      case DOWN:  makeBlockFall(game);        break;
+      case UP:    rotateBlock(game);          break;
     }
-  }
+  } else if (key == ' ') { // SPACE
+      rotateBlock(game);
+    }
 }
 

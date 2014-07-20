@@ -63,7 +63,7 @@ void generateRandomBlock(Game game) {
   int blockType = int(random(0, BlocksCount));
   int blockDirection = int(random(0, DirectionsCount));
   int xPos = int(random(0, game.wellWidth));
-  game.fallingBlock = createBlock(blockType, blockDirection, xPos, 0, game.wellWidth);
+  game.fallingBlock = createBlock(blockType, blockDirection, xPos, -1, game.wellWidth);
 }
 
 boolean isBlockMovingPossible(Game game, int moveDirection) {
@@ -95,6 +95,12 @@ void makeBlockFall(Game game) {
   } else {
     makeBlockFall(game.fallingBlock);
   }
+}
+
+void rotateBlock(Game game) {
+  Block block = game.fallingBlock;
+  Block rotated = createBlock(block.type, rotateDirection(block.direction), block.xPos, block.yPos, game.wellWidth);
+  game.fallingBlock = rotated;
 }
 
 Game updateGameState(Game game) {

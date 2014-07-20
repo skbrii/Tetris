@@ -38,13 +38,13 @@ BlockPart[] getTBlockParts(int direction) {
          parts[2] = new BlockPart(1,1);
          parts[3] = new BlockPart(1,2);
          break;
-    case North:
+    case West:
          parts[0] = new BlockPart(1,0);
          parts[1] = new BlockPart(0,1);
          parts[2] = new BlockPart(1,1);
          parts[3] = new BlockPart(2,1);
          break;
-    case West:
+    case North:
          parts[0] = new BlockPart(0,0);
          parts[1] = new BlockPart(0,1);
          parts[2] = new BlockPart(1,1);
@@ -69,7 +69,7 @@ BlockPart[] getSBlockParts(int direction) {
          parts[0] = new BlockPart(0,1);
          parts[1] = new BlockPart(1,0);
          parts[2] = new BlockPart(1,1);
-         parts[3] = new BlockPart(2,1);
+         parts[3] = new BlockPart(2,0);
          break;
   }
   return parts;
@@ -111,13 +111,13 @@ BlockPart[] getJBlockParts(int direction) {
          parts[2] = new BlockPart(1,1);
          parts[3] = new BlockPart(2,1);
          break;
-    case North:
+    case West:
          parts[0] = new BlockPart(0,0);
          parts[1] = new BlockPart(1,0);
          parts[2] = new BlockPart(0,1);
          parts[3] = new BlockPart(0,2);
          break;
-    case West:
+    case North:
          parts[0] = new BlockPart(0,0);
          parts[1] = new BlockPart(1,0);
          parts[2] = new BlockPart(2,0);
@@ -142,13 +142,13 @@ BlockPart[] getLBlockParts(int direction) {
          parts[2] = new BlockPart(1,0);
          parts[3] = new BlockPart(2,0);
          break;
-    case North:
+    case West:
          parts[0] = new BlockPart(0,0);
          parts[1] = new BlockPart(1,0);
          parts[2] = new BlockPart(1,1);
          parts[3] = new BlockPart(1,2);
          break;
-    case West:
+    case North:
          parts[0] = new BlockPart(0,1);
          parts[1] = new BlockPart(1,1);
          parts[2] = new BlockPart(2,0);
