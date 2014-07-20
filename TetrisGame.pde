@@ -10,7 +10,7 @@ class Game {
     wellWidth = w;
     wellHeight = h;
     fallingBlock = null;
-    erasingNeeded = true;
+    erasingNeeded = false;
     
     blocks = new boolean[w][h];
     for (int x = 0; x < w; x++)

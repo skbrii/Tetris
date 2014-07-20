@@ -19,7 +19,15 @@ void drawTestRect()
 void setup() {
 
   game = new Game(w, h);
-  game.fallingBlock = generateFallingBlock();
+  game.fallingBlock = createBlock(I, 0, 0, East);
+  
+  /*
+  // Debug
+  Block block = createBlock(I, North, 0, w);
+  for (int i = 0; i < 4; i++)
+    println("i: (" + block.parts[i].xPos + ", " + block.parts[i].yPos + ")");
+  */  
+  
   size(w*BlockScale + 1, h*BlockScale + 1);
 
   frameRate(framesInSecond);

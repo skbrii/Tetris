@@ -8,9 +8,10 @@ boolean isBlockStuck(Game game)
   
   boolean stuck = block.yPos + 1 >= game.wellHeight;
   for (int i = 0; (i < BlockPartsCount) && (!stuck); i++) {
-    stuck = stuck
-      || parts[i].yPos + 1 >= game.wellHeight
-      || blocks[parts[i].xPos][parts[i].yPos + 1];
+    if (parts[i].xPos >= 0 && parts[i].yPos >= 0)
+      stuck = stuck
+        || parts[i].yPos + 1 >= game.wellHeight
+        || blocks[parts[i].xPos][parts[i].yPos + 1];
   }
   
   return stuck;
@@ -21,7 +22,8 @@ void fixateBlock(Game game) {
   BlockPart[] parts = block.parts;
   
   for (int i = 0; i < BlockPartsCount; i++) {
-    game.blocks[parts[i].xPos][parts[i].yPos] = true;
+    if (parts[i].yPos >= 0)
+      game.blocks[parts[i].xPos][parts[i].yPos] = true;
   }
   game.fallingBlock = null;
 }
@@ -58,7 +60,16 @@ void enableErasing(Game game) {
 }
 
 void generateNextBlock(Game game) {
-  // Not implemented yet
+  int blockType = int(random(0, BlocksCount));
+  int blockDirection = int(random(0, DirectionsCount));
+  int xPos = int(random(0, game.wellWidth));
+  
+  // Debug only.
+  println("Type: " + blockType);
+  println("Direction: " + blockDirection);  
+  println("xPos: " + xPos);
+  
+  game.fallingBlock = createBlock(blockType, blockDirection, xPos, game.wellWidth);
 }
 
 Game updateGameState(Game game) {

@@ -1,4 +1,3 @@
-
 BlockPart[] getIBlockParts(int direction) {
   BlockPart[] parts = new BlockPart[BlockPartsCount];
   
@@ -8,10 +7,10 @@ BlockPart[] getIBlockParts(int direction) {
      parts[2] = new BlockPart(2,0);
      parts[3] = new BlockPart(3,0); 
   } else {
-     parts[0] = new BlockPart(0,1);
-     parts[1] = new BlockPart(0,2);
-     parts[2] = new BlockPart(0,3);
-     parts[3] = new BlockPart(0,4); 
+     parts[0] = new BlockPart(0,0);
+     parts[1] = new BlockPart(0,1);
+     parts[2] = new BlockPart(0,2);
+     parts[3] = new BlockPart(0,3); 
   }
   return parts;
 }
@@ -30,18 +29,46 @@ BlockPart[] getBlockParts(Block block) {
 }
 
 void moveBlockDown(Block block) {
-  
   block.yPos += 1;
   for (int i = 0; i < BlockPartsCount; i++) {
    block.parts[i].yPos += 1;
   }
 }
 
-Block generateFallingBlock() {
+// We assume, only unsigned int is possible in block parts[i].xPos .
+// yPos can be negative.
+void arrangeNewBlock(Block block, int wellWidth) {
   
-  // TODO: dummy, fix me
-  Block block = new Block(0,0,0,0);
-  block.parts = getIBlockParts(East);
+  int rightYShift = 0;
+  int leftXShift = 0;
+  int maxYShift = 0;
+  for (int i = 0; i < BlockPartsCount; i++) {
+    
+    maxYShift = max (block.parts[i].yPos, maxYShift);
+    
+    block.parts[i].xPos = block.parts[i].xPos + block.xPos;
+   
+    if (block.parts[i].xPos >= wellWidth)
+      leftXShift = max(leftXShift, block.parts[i].xPos + 1 - wellWidth);
+  }
   
+  for (int i = 0; i < BlockPartsCount; i++) {
+    block.parts[i].xPos = block.parts[i].xPos - leftXShift;
+    block.parts[i].yPos = block.parts[i].yPos - (1 + maxYShift);
+  }
+}
+
+Block createBlock(int type, int direction, int xPos, int wellWidth) {
+  Block block;
+ 
+  switch (type) {
+   case I: block = new Block(type, xPos, 0, direction); break;
+   
+   // TODO: debug only
+   default: block = new Block(type, xPos, 0, direction); break;
+  }
+  
+  block.parts = getIBlockParts(direction);
+  arrangeNewBlock(block, wellWidth);  
   return block;
 }
