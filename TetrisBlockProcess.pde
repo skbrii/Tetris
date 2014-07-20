@@ -56,6 +56,8 @@ void arrangeNewBlock(Block block, int wellWidth) {
     block.parts[i].xPos = block.parts[i].xPos - leftXShift;
     block.parts[i].yPos = block.parts[i].yPos - (1 + maxYShift);
   }
+  
+  block.yPos = -1;
 }
 
 Block createBlock(int type, int direction, int xPos, int wellWidth) {
