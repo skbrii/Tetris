@@ -24,7 +24,6 @@ void makeBlockFall(Block block) {
 // We assume, only unsigned int is possible in block parts[i].xPos.
 void arrangeNewBlock(Block block, int wellWidth) {
   
-  int rightYShift = 0;
   int leftXShift = 0;
   int maxYShift = 0;
   for (int i = 0; i < BlockPartsCount; i++) {

@@ -32,22 +32,29 @@ void fixateBlock(Game game) {
     if (parts[i].yPos >= 0)
       game.blocks[parts[i].xPos][parts[i].yPos] = true;
   }
+  
   game.fallingBlock = null;
 }
 
 void eraseFilledLines(Game game) {
+  
  for (int y = game.wellHeight - 1; y >= 0;) {
+   
    boolean erasable = true;
    for (int x = 0; x < game.wellWidth; x++)
      erasable = erasable && game.blocks[x][y];
+     
    if (erasable) {
+     
      // Move blocks down
      for (int y2 = y - 1; y2 >= 0; y2--)
        for (int x = 0; x < game.wellWidth; x++)
          game.blocks[x][y2 + 1] = game.blocks[x][y2];
+         
      // Top level needs to be cleared.
      for (int x = 0; x < game.wellWidth; x++)
        game.blocks[x][0] = false;
+       
    } else {
      y--;
    }
@@ -70,14 +77,19 @@ boolean isBlockMovingPossible(Game game, int moveDirection) {
   Block block = game.fallingBlock;
   if (block == null)
     return false;
+    
   boolean possible = true;
   for (int i = 0; i < BlockPartsCount; i++) {
+    
     int desiredXPos = block.parts[i].xPos + moveDirection;
     int desiredYPos = block.parts[i].yPos;
+    
     possible = possible 
-            && ((moveDirection == MoveLeft) ? desiredXPos >= 0 : desiredXPos < game.wellWidth);
+            && (moveDirection == MoveLeft ? desiredXPos >= 0 : desiredXPos < game.wellWidth);
+            
     if ((desiredYPos >= 0) && (desiredYPos < game.wellHeight))
       possible = possible && !(game.blocks[desiredXPos][desiredYPos]);
+      
   }
   return possible;
 }
@@ -113,8 +125,10 @@ Game updateGameState(Game game) {
   return currentGame;
 }
 
-boolean isGameOver(Game currentGame) {
-  // Not implemented yet
+boolean isGameOver(Game game) {
+  for (int i = 0; i < game.wellWidth; i++)
+    if (game.blocks[i][0])
+      return true;
   return false;
 }
 

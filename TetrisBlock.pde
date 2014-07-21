@@ -1,6 +1,6 @@
 // Classic Tetris only blocks
 static final int BlockPartsCount = 4;
-static final int BlocksCount = 8;
+static final int BlocksCount = 7;
 static final int DirectionsCount = 4;
 
 static final int I = 0;

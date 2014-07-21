@@ -10,22 +10,10 @@ float recalculateUpdatingThreshold(float threshold) {
   return threshold + 1;
 }
 
-void drawTestRect()
-{
-  fill(0xFF000000 | (int)random(0xFFFFFF));
-  rect(1*BlockScale, 1*BlockScale, BlockScale, BlockScale);
-}
-
 void setup() {
 
   game = new Game(w, h);
   generateRandomBlock(game);
-  /*
-  // Debug
-  Block block = createBlock(I, North, 0, w);
-  for (int i = 0; i < 4; i++)
-    println("i: (" + block.parts[i].xPos + ", " + block.parts[i].yPos + ")");
-  */  
   
   size(w*BlockScale + 1, h*BlockScale + 1);
 
@@ -43,7 +31,8 @@ void draw() {
     newGame = updateGameState(game);
     
     if (isGameOver(newGame)) {
-       // Do something on end of game
+      // Do something on end of game 
+      //exit();
     }
      
      updatingThreshold = 0;
